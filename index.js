@@ -16,6 +16,10 @@ mongoose.connect(config.mongoURI, {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 }).then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err))
+// mongoose.connect('mongodb+srv://<id>:<password>@boilerplate.tqpcu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+//   useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
+// }).then(() => console.log('MongoDB Connected...'))
+// .catch(err => console.log(err))
 
 
 app.get('/', (req, res) => {
@@ -28,6 +32,9 @@ app.post('/register', (req, res) =>{
     // 그것들을 데이터 베이스에 넣어준다.
 
     const user = new User(req.body) // req.body로 client가 보내는 정보를 받을 수 있다 by BodyParser덕분
+    // req.body (=모든 정보)를 User Model에 넣어줫다.
+
+    // save하기 전에 password를 암호화한다음 save해야된다. -> mongoose활용! goto User.js/userSchema.pre('save')
 
     user.save((err, userInfo) => {
         if(err) return res.json({ success: false, err })

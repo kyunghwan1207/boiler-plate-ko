@@ -31,6 +31,11 @@ const userSchema = mongoose.Schema({
     }
 })
 
+// index.js의 'register'에서 'save'하기 전에 ~를 하겠다.
+// userSchema.pre('save', function()){
+
+// }
+
 const User = mongoose.model('User', userSchema)
 
 module.exports = { User } // User.js를 다른 파일에서도 접근할 수 있게하기 위함
